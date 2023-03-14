@@ -1,9 +1,14 @@
 <?php
 
 require "lib/category.php";
+$message = "";
 if(count($_POST) > 0){
-    save($_POST['category']);
-    header("LOCATION:index.php");
+    if(strlen($_POST['category']) == 0){
+        $message = "this faild is required";
+    }else{
+        save($_POST['category']);
+        header("LOCATION:index.php");
+    }
 }
 
 ?>
@@ -18,7 +23,10 @@ if(count($_POST) > 0){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 
 </head>
-<body>
+<body>  
+    <?php if(strlen($message) > 0): ?>
+    <h1 style="color:red"><?= $message ?></h1>
+    <?php endif; ?>
     <form action="add.php" method="post">
         <input type="text" name="category">
         <input type="submit" value="save">
