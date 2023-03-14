@@ -32,3 +32,9 @@ function update($category,$id)
    $query =  mysqli_query(connect(),"UPDATE `category` SET `name` = '$category' WHERE `id` = $id");
    return mysqli_affected_rows(connect());
 }
+
+function search($key)
+{
+   $query =  mysqli_query(connect(),"SELECT * FROM `category` WHERE `name` LIKE '%$key%'");
+   return mysqli_fetch_all($query,MYSQLI_ASSOC);
+}

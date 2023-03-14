@@ -2,7 +2,12 @@
 
 require "lib/category.php";
 
-$data = get();
+if(count($_POST) > 0){
+    $data = search($_POST['search']);
+}else{
+    $data = get();
+}
+
 
 ?>
 
@@ -21,6 +26,11 @@ $data = get();
         <h1>
             <a href="add.php">add new category</a>
         </h1>
+
+        <form action="index.php" method="post">
+            <input type="text" name="search">
+            <input type="submit" value="search"> 
+        </form>
     </div>
     <table>
         <tr>
@@ -35,7 +45,6 @@ $data = get();
             <td> <?= $category['name'] ?> </td>
             <td><a href="delete.php?id=<?= $category['id'] ?>">delete</a></td>
             <td><a href="update.php?id=<?= $category['id'] ?>">update</a></td>
-
         </tr>
         <?php endforeach; ?>
     </table>
